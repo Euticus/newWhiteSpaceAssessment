@@ -163,16 +163,11 @@ public class RosettaStone
 
 
 	public void getTheMeaningOfLife() {
-		// TODO Auto-generated method stub
+
 		for(String a : this.promptAnswers)
 		{
 			System.out.println("\n"+ a);
 		}
-//		System.out.println("pish tegj glob glob is 42\n"
-//				+ "glob prok Silver is 68 Credits\n"
-//				+ "glob prok Gold is 57800 Credits\n"
-//				+ "glob prok Iron is 782 Credits\n"
-//				+ "I have no idea what you are talking about");
 		
 	}
 }
