@@ -8,7 +8,7 @@ public class galaxyDriver {
 		 FileReader fr = new FileReader();
 		 RosettaStone rs = new RosettaStone(fr.getValues(), 
 				 		fr.getMultipliers(), fr.getPrompts());
-		 // rs.getTheMeaningOfLife();
+		 rs.getTheMeaningOfLife();
 	}
 
 }

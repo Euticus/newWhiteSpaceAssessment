@@ -68,7 +68,7 @@ class RosettaStoneTest {
 	}	
 	
 	@Test
-	@DisplayName("does this and that")
+	@DisplayName("filters string not in this.values into tree map and calculates a multiplier")
 	void testHandleMultipliers()
 	{
 		// splits arrayList into before and after "is" --> arrOfStr
@@ -110,7 +110,7 @@ class RosettaStoneTest {
 	}
 	
 	@Test
-	@DisplayName("Whatever")
+	@DisplayName("executes appropriate actions based on how much || how many")
 	void testHandlePrompts()
 	{
 		// if "how much" --> 

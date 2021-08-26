@@ -87,10 +87,10 @@ public class RosettaStone
 	{
 		if(!str.contains(" is "))
 		{
-			this.promptAnswers.add("I have no idea what you're talking about");
+			this.promptAnswers.add("I have no idea what you are talking about");
+			return;
 		}
-		String[] arrOfStr = str.split(" is ");
-		System.out.println("this is the problem child " + arrOfStr[1]);
+		String[] arrOfStr = str.replaceAll("\\p{Punct}", "").split(" is ");
 		String[] tempArr;
 		if(arrOfStr[0].contains("how much"))
 		{
@@ -104,12 +104,12 @@ public class RosettaStone
 			}
 			int converted = RomanNumber.toInteger(tempStr);
 			tempStr = String.valueOf(converted);
-			tempStr = arrOfStr[1] + " is " + tempStr;
+			tempStr = arrOfStr[1] + "is " + tempStr;
 			this.promptAnswers.add(tempStr);
 		}
 		if(arrOfStr[0].contains("how many"))
 		{
-			tempArr = arrOfStr[1].split(" ");
+			tempArr = arrOfStr[1].replaceAll("\\p{Punct}", "").split(" ");
 			String tempStr = "";
 			int tempMultiplier = 1;
 			for(int i = 0; i < tempArr.length; i++)
@@ -128,7 +128,7 @@ public class RosettaStone
 					tempStr = String.valueOf(tempMultiplier * converted);
 				}
 			}
-			tempStr = arrOfStr[1] + " is " + tempStr + "Credits";
+			tempStr = arrOfStr[1] + "is " + tempStr + " Credits";
 			this.promptAnswers.add(tempStr);
 		}
 		// if "how much" --> 
