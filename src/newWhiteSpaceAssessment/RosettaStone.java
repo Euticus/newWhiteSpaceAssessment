@@ -2,7 +2,6 @@ package newWhiteSpaceAssessment;
 
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.TreeMap;
 
 public class RosettaStone 
@@ -58,13 +57,14 @@ public class RosettaStone
 		String tempRoman = "";
 		for(int i = 0; i < newArr.length; i++)
 		{
-			Integer convertedNumber;
+			int convertedNumber = 1;
 			if(!this.values.containsKey(newArr[i]))
 			{
 				tempElement = newArr[i]; 
 			}
 			else if(this.values.containsKey(newArr[i]))
 			{
+			
 				tempRoman += this.values.get(newArr[i]);
 			}
 			if(i == newArr.length-1)
@@ -159,6 +159,11 @@ public class RosettaStone
 	public ArrayList<String> getPrompts()
 	{
 		return this.prompts;
+	}
+	
+	public ArrayList<String> getPromptAnswers()
+	{
+		return this.promptAnswers;
 	}
 
 
