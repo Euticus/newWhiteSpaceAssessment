@@ -32,6 +32,7 @@ There are 4 Classes:
 		
 
 Tests include: 
+
 	-- two seed files for further test cases 
 	
 	-- 3 unit tests ensuring createValues() , createMultipliers(), and createPrompts() in the RosettaStone class are used properly 
