@@ -18,7 +18,7 @@ class FileReaderTest {
 				"tegj is L"), fr.getValues());
 		assertEquals(Arrays.asList("glob glob Silver is 34 Credits", 
 				"glob prok Gold is 57800 Credits", 
-				"pish pish Iron is 3910 Credits"), fr.getMultipliers());
+				"pish pish Iron is 3900 Credits"), fr.getMultipliers());
 		assertEquals(Arrays.asList("how much is pish tegj glob glob ?", 
 				"how many Credits is glob prok Silver ?", 
 				"how many Credits is glob prok Gold ?", 

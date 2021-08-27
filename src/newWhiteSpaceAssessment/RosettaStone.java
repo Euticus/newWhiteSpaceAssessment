@@ -25,7 +25,6 @@ public class RosettaStone
 			arrOfStr = v.split(" is ");
 			this.values.put(arrOfStr[0], arrOfStr[1]);
 		}
-		
 	}
 	
 	private void createMultipliers(ArrayList<String> multipliers) 
@@ -43,44 +42,36 @@ public class RosettaStone
 		{
 			this.handlePrompts(p);
 		}
-
 	}
 	
 	private void handleMultipliers(String str)
 	{
-		String[] arrOfStr = str.split(" is ");
-		String tempStr = arrOfStr[1].replaceAll("[^\\d]", " ");
-		Integer tempCredits = Integer.parseInt(tempStr.trim());
+		String[] arrOfStr = str.split(" is "); // divides the string based on keyword "is"
+		String numCredits = arrOfStr[1].replaceAll("[^\\d]", " ");
+		Integer multiplier = Integer.parseInt(numCredits.trim());
 		
-		String[] newArr = arrOfStr[0].split(" ");
-		String tempElement = "";
-		String tempRoman = "";
-		for(int i = 0; i < newArr.length; i++)
+		String[] valueAndMultiplierArr = arrOfStr[0].split(" ");
+		String element = "";
+		String roman = "";
+		for(int i = 0; i < valueAndMultiplierArr.length; i++)
 		{
 			int convertedNumber = 1;
-			if(!this.values.containsKey(newArr[i]))
+			if(!this.values.containsKey(valueAndMultiplierArr[i]))
 			{
-				tempElement = newArr[i]; 
+				element = valueAndMultiplierArr[i]; 
 			}
-			else if(this.values.containsKey(newArr[i]))
+			else if(this.values.containsKey(valueAndMultiplierArr[i]))
 			{
-			
-				tempRoman += this.values.get(newArr[i]);
+				roman += this.values.get(valueAndMultiplierArr[i]);
 			}
-			if(i == newArr.length-1)
+			if(i == valueAndMultiplierArr.length-1)
 			{
-				convertedNumber = RomanNumber.toInteger(tempRoman);
-				tempCredits = tempCredits / convertedNumber;
-				this.multipliers.put(tempElement, tempCredits);
+				convertedNumber = RomanNumber.toInteger(roman);
+				multiplier = multiplier / convertedNumber;
+				this.multipliers.put(element, multiplier);
 			}
 		}
 		
-		// splits arrayList into before and after "is" --> arrOfStr
-		// if after, pull out the integer and return it --> tempMult
-		// if before, grab the words in this.values and translate them RomanNumeral.toInteger() --tempInt
-		// return tempMult/tempInt --> multiplier
-		// if before, return any word not in this.values --> tempElement
-		// this.multipliers.add(tempElement, multiplier)
 	}
 	
 	private void handlePrompts(String str)
@@ -90,60 +81,47 @@ public class RosettaStone
 			this.promptAnswers.add("I have no idea what you are talking about");
 			return;
 		}
-		String[] arrOfStr = str.replaceAll("\\p{Punct}", "").split(" is ");
-		String[] tempArr;
+		String[] arrOfStr = str.replaceAll("\\p{Punct}", "").split(" is "); // splits string before and after "is"
+		String[] arrayOfPrompts;
 		if(arrOfStr[0].contains("how much"))
 		{
-			tempArr = arrOfStr[1].split(" ");
-			String tempStr = "";
-			for(String s : tempArr)
+			arrayOfPrompts = arrOfStr[1].split(" ");
+			String promptAnswer = "";
+			for(String s : arrayOfPrompts)
 			{
 				if(this.values.containsKey(s)) {
-					tempStr += this.values.get(s);
+					promptAnswer += this.values.get(s);
 				}
 			}
-			int converted = RomanNumber.toInteger(tempStr);
-			tempStr = String.valueOf(converted);
-			tempStr = arrOfStr[1] + "is " + tempStr;
-			this.promptAnswers.add(tempStr);
+			int converted = RomanNumber.toInteger(promptAnswer);
+			promptAnswer = String.valueOf(converted);
+			promptAnswer = arrOfStr[1] + "is " + promptAnswer;
+			this.promptAnswers.add(promptAnswer);
 		}
 		if(arrOfStr[0].contains("how many"))
 		{
-			tempArr = arrOfStr[1].replaceAll("\\p{Punct}", "").split(" ");
-			String tempStr = "";
+			arrayOfPrompts = arrOfStr[1].replaceAll("\\p{Punct}", "").split(" ");
+			String promptAnswer = "";
 			int tempMultiplier = 1;
-			for(int i = 0; i < tempArr.length; i++)
+			for(int i = 0; i < arrayOfPrompts.length; i++)
 			{
-				if(this.multipliers.containsKey(tempArr[i]))
+				if(this.multipliers.containsKey(arrayOfPrompts[i]))
 				{
-					tempMultiplier = this.multipliers.get(tempArr[i]);
+					tempMultiplier = this.multipliers.get(arrayOfPrompts[i]);
 				}
-				else if (this.values.containsKey(tempArr[i])) 
+				else if (this.values.containsKey(arrayOfPrompts[i])) 
 				{
-					tempStr += this.values.get(tempArr[i]);
+					promptAnswer += this.values.get(arrayOfPrompts[i]);
 				}
-				if(i == tempArr.length-1)
+				if(i == arrayOfPrompts.length-1)
 				{
-					int converted = RomanNumber.toInteger(tempStr);
-					tempStr = String.valueOf(tempMultiplier * converted);
+					int converted = RomanNumber.toInteger(promptAnswer);
+					promptAnswer = String.valueOf(tempMultiplier * converted);
 				}
 			}
-			tempStr = arrOfStr[1] + "is " + tempStr + " Credits";
-			this.promptAnswers.add(tempStr);
+			promptAnswer = arrOfStr[1] + "is " + promptAnswer + " Credits";
+			this.promptAnswers.add(promptAnswer);
 		}
-		// if "how much" --> 
-		// 		split before/after "is" --> arrOfStr
-		// 		String s += arrOfStr[1] + " is "
-		// 		s += RomanNumeral.toInteger(str)
-		// 		this.promptAnswers.add(s)
-		// if "how many credits"
-		// 		Integer tempMult = find word in this.multiplers and set equal to its value
-		// 		split before/after "is" --> arrOfStr
-		// 		String s += arrOfStr[1] + " is " + String.parseString(tempMult * RomanNumeral.toInteger(str))
-		// 		this.promptsAnswers.add(s)
-		// else 
-		//
-		// 		this.promptAnswers.add("I have no idea what you are talking about")
 	}
 	
 	public TreeMap<String, String> getValues()
@@ -166,13 +144,10 @@ public class RosettaStone
 		return this.promptAnswers;
 	}
 
-
 	public void getTheMeaningOfLife() {
-
 		for(String a : this.promptAnswers)
 		{
 			System.out.println("\n"+ a);
-		}
-		
+		}	
 	}
 }
